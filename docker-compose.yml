@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+  mixtape:
+    build:
+      context: .
+    volumes:
+      - ${PWD}/testdata/:/app/testdata
