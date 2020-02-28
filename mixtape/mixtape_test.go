@@ -136,6 +136,15 @@ func TestMixtape_AddSongsToPlaylist(t *testing.T) {
 
 func TestMixtape_ApplyChanges(t *testing.T) {
 	t.Run("Changes are valid", func(t *testing.T) {
+		mixtape, err := LoadMixtapeFromFile("../testdata/mixtape.json")
+		require.NoError(t, err)
+		require.NotNil(t, mixtape)
 
+		changes, err := LoadChangesFromFile("../testdata/changes.json")
+		require.NoError(t, err)
+		require.NotNil(t, changes)
+
+		err = mixtape.ApplyChanges(changes)
+		require.NoError(t, err)
 	})
 }
