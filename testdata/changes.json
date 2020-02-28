@@ -4,19 +4,26 @@
       {
         "user_id": "2",
         "song_ids": [
-          "1"
+          "1",
+          "2",
+          "3",
+          "4"
         ]
       }
     ],
     "delete": {
       "playlist_ids": [
-        "1"
+        "1",
+        "4"
       ]
     },
     "add_songs": [
       {
         "playlist_id": "2",
         "song_ids": [
+          "1",
+          "2",
+          "3",
           "8",
           "32"
         ]

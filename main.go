@@ -8,6 +8,9 @@ import (
 	"github.com/magicalbanana/highspot/mixtape"
 )
 
+// I opted to `panic` here instead of logging since this application will not be
+// a streaming one. But ideally, we can improve this application's error
+// handling by logging the error instead and making them even more verbose.
 func main() {
 	// load file mixtape
 	mxt, err := mixtape.LoadMixtapeFromFile("./testdata/mixtape.json")

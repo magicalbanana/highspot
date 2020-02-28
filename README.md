@@ -19,14 +19,19 @@ $ docker-compose run mixtape
 
 #### Baremetal
 
-To run in baremental (directly on your Host machine) you must have
-[go](https://golang.org) installaed on your machine. Once you have that
+To run in baremental (directly on your host machine) you must have
+[go](https://golang.org) installed in your machine. Once you have that
 installed, run the following command:
 
 ```
 $ go get ./...
 $ go run main.go
 ```
+
+#### Output
+
+The `output.json` file will be located in the `testdata/` directory in the
+root folder. This applies to both running in a Docker container or baremetal.
 
 ### Author's Note
 
