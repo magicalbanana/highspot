@@ -1,5 +1,11 @@
 package mixtape
 
+import (
+	"sort"
+	"strconv"
+)
+
+// Playlist ...
 type Playlist struct {
 	ID      string   `json:"id"`
 	UserID  string   `json:"user_id"`
@@ -30,4 +36,25 @@ func (p Playlists) FindPlaylist(playlistID string) *Playlist {
 	}
 
 	return nil
+}
+
+// generateNextID generates the next ID from the playlist collection. We use
+// this when we're adding a new playlist to the playlists collection.
+func (p Playlists) generateNextID() (string, error) {
+	if len(p) < 1 {
+		return "1", nil
+	}
+
+	idsInt := make([]int, 0)
+	for i := range p {
+		idInt, err := strconv.Atoi(p[i].ID)
+		if err != nil {
+			return "", err
+		}
+		idsInt = append(idsInt, idInt)
+	}
+
+	sort.Ints(idsInt)
+
+	return strconv.Itoa((idsInt[len(idsInt)-1] + 1)), nil
 }

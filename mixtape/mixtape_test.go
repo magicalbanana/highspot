@@ -29,7 +29,6 @@ func TestMixtape_NewPlaylist(t *testing.T) {
 		err := mixtape.NewPlaylist(&playlist)
 		require.NoError(t, err)
 		require.Equal(t, 1, len(mixtape.Playlists))
-
 	})
 
 	t.Run("does not have one song", func(t *testing.T) {
@@ -39,6 +38,39 @@ func TestMixtape_NewPlaylist(t *testing.T) {
 		err := mixtape.NewPlaylist(&playlist)
 		require.Error(t, err)
 		require.Equal(t, ErrNewPlaylistRequiresOneSong, err.Error())
+	})
+
+	t.Run("has no playlist yet", func(t *testing.T) {
+		playlist := Playlist{}
+		playlist.SongIDs = []string{"1"}
+
+		mixtape := Mixtape{}
+		err := mixtape.NewPlaylist(&playlist)
+		require.NoError(t, err)
+		require.Equal(t, 1, len(mixtape.Playlists))
+		// we're accessing the first element because we only expect
+		// one playlist and we also expect the ID to be 1
+		require.Equal(t, "1", mixtape.Playlists[0].ID)
+	})
+
+	t.Run("has one playlist", func(t *testing.T) {
+		playlist := Playlist{}
+		// we need to start from one
+		playlist.ID = "1"
+		playlist.SongIDs = []string{"1"}
+
+		mixtape := Mixtape{}
+		// add one playlist
+		mixtape.Playlists = Playlists{&playlist}
+
+		// we'll reuse the same playlist, shouldn't matter since we're
+		// generating the ID anyway
+		err := mixtape.NewPlaylist(&playlist)
+		require.NoError(t, err)
+		require.Equal(t, 2, len(mixtape.Playlists))
+		// we're accessing the second element because we only expect
+		// two playlist and we also expect the ID to be 2
+		require.Equal(t, "2", mixtape.Playlists[1].ID)
 	})
 }
 

@@ -52,6 +52,12 @@ func (m *Mixtape) NewPlaylist(playlist *Playlist) error {
 		m.Playlists = make(Playlists, 0)
 	}
 
+	// generate ID for Playlist
+	id, err := m.Playlists.generateNextID()
+	if err != nil {
+		return err
+	}
+	playlist.ID = id
 	m.Playlists = append(m.Playlists, playlist)
 
 	return nil
